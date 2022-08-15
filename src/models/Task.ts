@@ -10,9 +10,10 @@ export interface ITask {
   duration?: string;
   user: IUser;
   tags?: ITag[];
+  completed: boolean;
 }
 
-const taskSchema = new mongoose.Schema({
+const taskSchema = new mongoose.Schema<ITask>({
   title: { type: String, required: true },
   description: { type: String, required: true },
   date: { type: String, required: true },
@@ -29,6 +30,7 @@ const taskSchema = new mongoose.Schema({
       ref: "Tag",
     },
   ],
+  completed: { type: Boolean, default: false },
 });
 
 const Task = mongoose.model("Task", taskSchema);
