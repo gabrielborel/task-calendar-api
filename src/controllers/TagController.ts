@@ -3,13 +3,21 @@ import { CallbackError } from "mongoose";
 import Tag from "../models/Tag";
 
 export default class TagController {
+  static async listAllByUserId(req: Request, res: Response) {
+    const { userId } = req.params;
+
+    const tags = await Tag.find({ user: userId });
+
+    res.status(200).send({ tags });
+  }
+
   static async create(req: Request, res: Response) {
     const { name, color, userId } = req.body;
 
     const newTag = await Tag.create({ user: userId, name, color });
     newTag.save((err) => {
       if (err) {
-        res.status(404).send({ err });
+        res.status(500).send({ err });
       }
     });
 
