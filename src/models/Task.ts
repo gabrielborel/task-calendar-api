@@ -1,15 +1,36 @@
 import mongoose from "mongoose";
+import { ITag } from "./Tag";
+import { IUser } from "./User";
+
+export interface ITask {
+  title: string;
+  description: string;
+  date: string;
+  time?: string;
+  duration?: string;
+  user: IUser;
+  tags?: ITag[];
+}
 
 const taskSchema = new mongoose.Schema({
-  id: { type: String },
-  title: { type: String },
-  description: { type: String },
-  date: { type: Date },
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  date: { type: String, required: true },
   time: { type: String },
   duration: { type: String },
-  tags: [{ name: String }],
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  tags: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Tag",
+    },
+  ],
 });
 
-const tasks = mongoose.model("tasks", taskSchema);
+const Task = mongoose.model("Task", taskSchema);
 
-export default tasks;
+export default Task;
