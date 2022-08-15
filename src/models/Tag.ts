@@ -8,12 +8,11 @@ export interface ITag {
 }
 
 const tagSchema = new mongoose.Schema<ITag>({
-  name: { type: String, required: true },
-  color: { type: String, required: true },
+  name: { type: String },
+  color: { type: String },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    required: true,
   },
 });
 

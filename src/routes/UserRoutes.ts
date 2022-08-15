@@ -3,6 +3,6 @@ import { Router } from "express";
 
 const router = Router();
 
-router.post("/users", UserController.createUser);
+router.post("/users", UserController.create);
 
 export default router;
