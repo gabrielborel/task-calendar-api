@@ -2,7 +2,7 @@ import express from "express";
 import database from "./config/dbConnect";
 import router from "./routes";
 
-const $PORT = 3333;
+const $PORT = process.env.PORT || 3000;
 
 database.on("error", console.log.bind(console, "Erro de conexão"));
 database.once("open", () => {
