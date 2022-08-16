@@ -6,9 +6,13 @@ export default class TaskController {
   static async listAllByUserId(req: Request, res: Response) {
     const { userId } = req.params;
 
-    const tasks = await Task.find({ user: userId });
+    Task.find({ user: userId }, (tasks, err) => {
+      if (err) {
+        res.status(500).send({ err });
+      }
 
-    res.status(200).send({ tasks });
+      res.status(200).send({ tasks });
+    });
   }
 
   static async create(req: Request, res: Response) {
