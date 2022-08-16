@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dbConnect_1 = __importDefault(require("./config/dbConnect"));
 const routes_1 = __importDefault(require("./routes"));
-const $PORT = 3333;
+const $PORT = process.env.PORT || 3000;
 dbConnect_1.default.on("error", console.log.bind(console, "Erro de conexão"));
 dbConnect_1.default.once("open", () => {
     console.log("Connected with database.");
