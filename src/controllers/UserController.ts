@@ -9,9 +9,9 @@ export default class UserController {
     const emailAlreadyExists = savedUsers.some((savedUser) => savedUser.email === email);
 
     if (emailAlreadyExists) {
-      res.status(400).send({
+      res.status(200).send({
         message: "An account with this email already exists",
-        user: savedUsers.find((savedUser) => savedUser.email === email),
+        newUser: savedUsers.find((savedUser) => savedUser.email === email),
       });
     } else {
       const newUser = await User.create({ name, email, avatar });

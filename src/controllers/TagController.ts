@@ -31,12 +31,12 @@ export default class TagController {
       if (err) {
         res.status(500).send({ message: err.message });
       }
-    });
 
-    res.status(200).send({ message: "Tag removed successfully" });
+      res.status(200).send({ message: "Tag removed successfully" });
+    });
   }
 
-  static async update(req: Request, res: Response) {
+  static update(req: Request, res: Response) {
     const { id } = req.params;
     const { name, color } = req.body;
 
@@ -44,8 +44,8 @@ export default class TagController {
       if (err) {
         res.status(500).send({ err });
       }
-    });
 
-    res.status(200).send({ message: "Tag updated successfully" });
+      res.status(200).send({ message: "Tag updated successfully" });
+    });
   }
 }

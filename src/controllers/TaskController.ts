@@ -30,20 +30,21 @@ export default class TaskController {
       if (err) {
         res.status(500).send({ message: err.message });
       }
-    });
 
-    res.status(200).send({ message: "Task removed successfully" });
+      res.status(200).send({ message: "Task removed successfully" });
+    });
   }
 
   static async update(req: Request, res: Response) {
     const { id } = req.params;
 
-    Task.findByIdAndUpdate(id, { $set: req.body }, (err: CallbackError) => {
+    Task.findByIdAndUpdate(id, { $set: req.body }, async (err: CallbackError) => {
       if (err) {
         res.status(500).send({ err });
       }
-    });
 
-    res.status(200).send({ message: "Task updated successfully" });
+      const task = await Task.findById(id);
+      res.status(200).send({ message: "Task updated successfully", task });
+    });
   }
 }

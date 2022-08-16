@@ -33,6 +33,6 @@ const taskSchema = new mongoose.Schema<ITask>({
   completed: { type: Boolean, default: false },
 });
 
-const Task = mongoose.model("Task", taskSchema);
+const Task = mongoose.model<ITask>("Task", taskSchema);
 
 export default Task;
