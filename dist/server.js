@@ -4,9 +4,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const dbConnect_1 = __importDefault(require("./config/dbConnect"));
+const routes_1 = __importDefault(require("./routes"));
 const $PORT = 3333;
-const app = (0, express_1.default)();
-app.get("/", (request, response) => {
-    return response.json({ message: "Hello World" });
+dbConnect_1.default.on("error", console.log.bind(console, "Erro de conexão"));
+dbConnect_1.default.once("open", () => {
+    console.log("Connected with database.");
 });
+const app = (0, express_1.default)();
+(0, routes_1.default)(app);
 app.listen($PORT, () => console.log(`Server is running on port ${$PORT}.`));
