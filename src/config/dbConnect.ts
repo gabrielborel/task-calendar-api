@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
+import "dotenv/config";
 
-mongoose.connect(
-  "mongodb+srv://gabrielborel:bielborel19@cluster0.weeym3z.mongodb.net/task-calendar?retryWrites=true&w=majority"
-);
+mongoose.connect(process.env.MONGO_DB_CONNECT!);
 
 const database = mongoose.connection;
 
